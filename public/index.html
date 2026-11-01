@@ -1,0 +1,469 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+
+    <title>CineVerse | A Cinematic Experience</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- HEADER AND NAVIGATION -->
+    <header class="site-header">
+
+        <nav class="navbar">
+            <a class="logo" href="#">CINE<span>VERSE</span></a>
+
+            <div class="nav-links">
+                <a href="#movies">Discover</a>
+                <a href="#upcoming">Coming Soon</a>
+                <a href="#games">Entertainment</a>
+            </div>
+
+            <button class="login-button" type="button">
+                Sign In <span aria-hidden="true">↗</span>
+            </button>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+
+            <div class="hero-content">
+                <p class="eyebrow">THE ART OF CINEMA</p>
+
+                <h1>
+                    Stories worth<br>
+                    <span>experiencing.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Discover extraordinary films. Find your next
+                    favourite story. Make every movie night memorable.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="hero-button" href="#movies">
+                        Explore Movies <span aria-hidden="true">↗</span>
+                    </a>
+
+                    <span class="hero-caption">
+                        YOUR WORLD. YOUR CINEMA.
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-orbit orbit-one"></div>
+                <div class="hero-orbit orbit-two"></div>
+
+                <div class="hero-glass">
+                    <span class="glass-symbol">C</span>
+                    <span class="glass-caption">CINEMATIC UNIVERSE</span>
+                </div>
+
+                <div class="hero-reflection"></div>
+            </div>
+
+            <div class="hero-bottom">
+                <span>01 — DISCOVER</span>
+                <span>CURATED FOR FILM LOVERS</span>
+                <span>SCROLL TO EXPLORE ↓</span>
+            </div>
+
+        </section>
+    </header>
+
+    <main>
+
+        <!-- MOVIE COLLECTION -->
+        <section id="movies" class="movies-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR NEXT EXPERIENCE</p>
+
+                    <h2>
+                        Discover Cinema<span class="heading-period">.</span>
+                    </h2>
+
+                    <p class="section-description">
+                        Great stories. Unforgettable worlds.
+                    </p>
+                </div>
+
+                <span class="section-note">THE COLLECTION / 001</span>
+            </div>
+
+            <!-- MOVIE SEARCH -->
+            <div class="search-wrap">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+
+                <input
+                    type="text"
+                    id="movie-search"
+                    placeholder="Search films, genres, languages..."
+                    aria-label="Search movies by title, genre, or language"
+                >
+
+                <span class="search-shortcut">FILM SEARCH</span>
+            </div>
+
+            <!-- LANGUAGE FILTERS -->
+            <div
+                class="language-filters"
+                id="language-filters"
+                aria-label="Filter movies by language"
+            >
+
+                <button
+                    class="language-filter active"
+                    type="button"
+                    data-language="all"
+                    aria-pressed="true"
+                >
+                    All Movies
+                </button>
+
+                <button
+                    class="language-filter"
+                    type="button"
+                    data-language="English"
+                    aria-pressed="false"
+                >
+                    English
+                </button>
+
+                <button
+                    class="language-filter"
+                    type="button"
+                    data-language="Tamil"
+                    aria-pressed="false"
+                >
+                    Tamil
+                </button>
+
+                <button
+                    class="language-filter"
+                    type="button"
+                    data-language="Malayalam"
+                    aria-pressed="false"
+                >
+                    Malayalam
+                </button>
+
+            </div>
+
+            <!-- MOVIE CARDS ARE LOADED THROUGH JAVASCRIPT -->
+            <div id="movie-grid" class="movie-grid">
+                <p>Loading films...</p>
+            </div>
+
+        </section>
+
+        <!-- COMING SOON -->
+        <section id="upcoming" class="feature-section">
+
+            <div class="feature-copy">
+                <p class="eyebrow">THE NEXT CHAPTER</p>
+
+                <h2>
+                    Something extraordinary<br>
+                    is on the horizon.
+                </h2>
+
+                <p>
+                    Keep an eye on upcoming releases and find the
+                    stories you'll want to see next.
+                </p>
+            </div>
+
+            <div class="feature-mark" aria-hidden="true">
+                CV<span>+</span>
+            </div>
+
+        </section>
+
+        <!-- ENTERTAINMENT -->
+        <section id="games" class="games-section">
+
+            <div>
+                <p class="eyebrow">BEYOND THE SCREEN</p>
+
+                <h2>For the love of film.</h2>
+
+                <p>
+                    Movie trivia and entertainment experiences
+                    are coming to CineVerse.
+                </p>
+            </div>
+
+            <span class="coming-soon-label">IN DEVELOPMENT</span>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+
+        <a class="logo footer-logo" href="#">
+            CINE<span>VERSE</span>
+        </a>
+
+        <p>A universe built around cinema.</p>
+
+        <span class="footer-copy">© 2026 CINEVERSE</span>
+
+    </footer>
+
+    <!-- MOVIE DETAILS AND SHOWTIMES POPUP -->
+    <div
+        id="movie-modal"
+        class="movie-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
+
+            <button
+                id="close-modal"
+                class="close-modal"
+                type="button"
+                aria-label="Close movie details"
+            >&times;</button>
+
+            <p class="eyebrow">FILM DETAILS</p>
+
+            <h2 id="modal-title">Movie Title</h2>
+
+            <p id="modal-genre"></p>
+
+            <p id="modal-rating"></p>
+
+            <p id="modal-description"></p>
+
+            <!-- AVAILABLE SHOWTIMES -->
+            <section
+                id="showtimes-section"
+                class="showtimes-section"
+            >
+
+                <p class="eyebrow">YOUR CINEMA EXPERIENCE</p>
+
+                <h3>Available Showtimes</h3>
+
+                <div id="showtimes-list">
+                    <p>Select a movie to explore its showtimes.</p>
+                </div>
+
+            </section>
+
+            <button
+                id="modal-book-button"
+                class="book-button"
+                type="button"
+            >
+                Book Tickets
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- SEAT SELECTION POPUP -->
+    <div
+        id="seat-modal"
+        class="seat-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="seat-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="seat-modal-title"
+        >
+
+            <button
+                id="close-seat-modal"
+                class="close-modal"
+                type="button"
+                aria-label="Close seat selection"
+            >&times;</button>
+
+            <p class="eyebrow">YOUR CINEMA EXPERIENCE</p>
+
+            <h2 id="seat-modal-title">Select Your Seats</h2>
+
+            <p id="seat-movie-name">Movie title</p>
+
+            <p id="seat-showtime-details">
+                Select your preferred seats.
+            </p>
+
+            <!-- CINEMA SCREEN -->
+            <div class="cinema-screen-container">
+
+                <div class="cinema-screen"></div>
+
+                <p>SCREEN THIS WAY</p>
+
+            </div>
+
+            <!-- SEATS GENERATED THROUGH JAVASCRIPT -->
+            <div id="seat-grid" class="seat-grid"></div>
+
+            <!-- SEAT LEGEND -->
+            <div class="seat-legend">
+
+                <div class="legend-item">
+                    <span class="legend-seat available"></span>
+                    <span>Available</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-seat selected"></span>
+                    <span>Selected</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-seat occupied"></span>
+                    <span>Occupied</span>
+                </div>
+
+            </div>
+
+            <!-- BOOKING SUMMARY -->
+            <div class="seat-booking-summary">
+
+                <div>
+                    <p>Selected Seats</p>
+                    <h3 id="selected-seat-names">None</h3>
+                </div>
+
+                <div>
+                    <p>Total Amount</p>
+                    <h3 id="seat-total-price">₹0</h3>
+                </div>
+
+            </div>
+
+            <button
+                id="confirm-seats-button"
+                class="book-button"
+                type="button"
+            >
+                Continue
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- BOOKING CONFIRMATION POPUP -->
+    <div
+        id="booking-modal"
+        class="booking-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="booking-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="booking-modal-title"
+        >
+
+            <button
+                id="close-booking-modal"
+                class="close-modal"
+                type="button"
+                aria-label="Close booking confirmation"
+            >&times;</button>
+
+            <div class="booking-success-icon" aria-hidden="true">
+                ✓
+            </div>
+
+            <p class="eyebrow">CINEVERSE TICKETING</p>
+
+            <h2 id="booking-modal-title">Booking Confirmed!</h2>
+
+            <p class="booking-success-message">
+                Your next cinematic experience is secured.
+            </p>
+
+            <!-- BOOKING REFERENCE -->
+            <div class="booking-reference-box">
+                <p>BOOKING REFERENCE</p>
+                <h3 id="booking-reference">CV-XXXXXXXX</h3>
+            </div>
+
+            <!-- BOOKING DETAILS -->
+            <div class="booking-details">
+
+                <div class="booking-detail-row">
+                    <span>Movie</span>
+                    <strong id="booking-movie">—</strong>
+                </div>
+
+                <div class="booking-detail-row">
+                    <span>Theatre</span>
+                    <strong id="booking-theatre">—</strong>
+                </div>
+
+                <div class="booking-detail-row">
+                    <span>Date</span>
+                    <strong id="booking-date">—</strong>
+                </div>
+
+                <div class="booking-detail-row">
+                    <span>Showtime</span>
+                    <strong id="booking-time">—</strong>
+                </div>
+
+                <div class="booking-detail-row">
+                    <span>Seats</span>
+                    <strong id="booking-seats">—</strong>
+                </div>
+
+                <div class="booking-detail-row">
+                    <span>Tickets</span>
+                    <strong id="booking-ticket-count">—</strong>
+                </div>
+
+                <div class="booking-detail-row booking-total-row">
+                    <span>Total Paid</span>
+                    <strong id="booking-total">₹0</strong>
+                </div>
+
+            </div>
+
+            <button
+                id="close-booking-button"
+                class="book-button"
+                type="button"
+            >
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse | Book Tickets</title>
+
+    <style>
+        :root {
+            --bg: #0b0b12;
+            --panel: #151520;
+            --panel-light: #20202e;
+            --red: #f84464;
+            --text: #f5f5f7;
+            --muted: #a4a4b5;
+            --green: #28c76f;
+            --blue: #4d8dff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button, select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px 6%;
+            background: #11111b;
+            border-bottom: 1px solid #292938;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--red);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            border: none;
+            background: transparent;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        nav button:hover {
+            background: var(--panel-light);
+        }
+
+        .hero {
+            padding: 35px 6% 20px;
+        }
+
+        .hero h1 {
+            margin-bottom: 8px;
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+        .hero p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 10px 24px 60px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid #292938;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        select, input {
+            width: 100%;
+            background: #20202e;
+            border: 1px solid #39394a;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--red);
+        }
+
+        .showtime-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .showtime-card {
+            background: #20202e;
+            border: 1px solid #39394a;
+            border-radius: 12px;
+            padding: 18px;
+            transition: 0.2s;
+        }
+
+        .showtime-card.active {
+            border-color: var(--red);
+            box-shadow: 0 0 0 1px var(--red);
+        }
+
+        .showtime-card h3 {
+            margin: 0 0 10px;
+        }
+
+        .showtime-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .price {
+            color: var(--green);
+            font-weight: bold;
+            font-size: 19px;
+        }
+
+        .primary-btn {
+            background: var(--red);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 12px 18px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: #ff3156;
+            transform: translateY(-1px);
+        }
+
+        .primary-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secondary-btn {
+            background: #29293b;
+            border: 1px solid #45455a;
+            color: white;
+            padding: 11px 15px;
+            border-radius: 8px;
+        }
+
+        .screen {
+            width: 80%;
+            max-width: 650px;
+            margin: 28px auto 35px;
+            padding: 12px;
+            text-align: center;
+            color: #222;
+            font-size: 13px;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #999, white, #999);
+            border-radius: 50% 50% 5px 5px;
+            box-shadow: 0 8px 25px #ffffff20;
+        }
+
+        .seat-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .legend-box {
+            width: 17px;
+            height: 17px;
+            border-radius: 5px;
+        }
+
+        .seat-grid {
+            display: grid;
+            grid-template-columns: repeat(10, minmax(24px, 42px));
+            justify-content: center;
+            gap: 9px;
+            overflow-x: auto;
+        }
+
+        .seat {
+            aspect-ratio: 1;
+            min-width: 0;
+            padding: 0;
+            border-radius: 7px 7px 4px 4px;
+            border: 1px solid var(--green);
+            background: #173a2a;
+            color: #b7ffd3;
+            font-size: 12px;
+            transition: 0.15s;
+        }
+
+        .seat.available:hover {
+            background: var(--green);
+            color: #061b0e;
+            transform: scale(1.08);
+        }
+
+        .seat.occupied {
+            background: #4a2530;
+            border-color: #8c3c4e;
+            color: #ff9eae;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .seat.selected {
+            background: var(--blue);
+            border-color: #8cb5ff;
+            color: white;
+        }
+
+        .row-gap {
+            margin-top: 8px;
+        }
+
+        .seat-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #333344;
+        }
+
+        .seat-summary p {
+            color: var(--muted);
+            margin: 6px 0;
+        }
+
+        .total {
+            color: var(--green);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .message {
+            padding: 14px;
+            border-radius: 8px;
+            margin: 16px 0;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .message.error {
+            display: block;
+            background: #431d28;
+            color: #ffb6c4;
+        }
+
+        .message.success {
+            display: block;
+            background: #173c2a;
+            color: #b5ffd0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .booking-card {
+            border: 1px solid #343447;
+            background: #20202e;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 14px;
+            line-height: 1.8;
+        }
+
+        .booking-card strong {
+            color: var(--green);
+        }
+
+        .loading {
+            color: var(--muted);
+            padding: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            padding: 25px;
+            border-top: 1px solid #292938;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 16px 5%;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            main {
+                padding: 10px 14px 40px;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            .selection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .seat-grid {
+                gap: 5px;
+                grid-template-columns: repeat(10, minmax(22px, 1fr));
+            }
+
+            .seat {
+                font-size: 10px;
+            }
+
+            .screen {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Cine<span>Verse</span></div>
+
+        <nav>
+            <button onclick="window.location.href='/'">Home</button>
+            <button onclick="showBookings()">My Bookings</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Book Your Movie Experience 🎬</h1>
+        <p>Choose your movie, find a show, select your seats, and book your tickets.</p>
+    </section>
+
+    <main>
+        <div id="globalMessage" class="message"></div>
+
+        <section class="panel" id="moviePanel">
+            <h2>1. Choose Your Movie</h2>
+
+            <div class="selection-grid">
+                <div>
+                    <label for="movieSelect">Movie</label>
+                    <select id="movieSelect">
+                        <option value="">Loading movies...</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="dateFilter">Show date</label>
+                    <input type="date" id="dateFilter">
+                </div>
+
+                <div>
+                    <label for="cityFilter">City</label>
+                    <select id="cityFilter">
+                        <option value="">All cities</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="showtimeStatus" class="loading">Loading showtimes...</div>
+            <div id="showtimeList" class="showtime-list"></div>
+        </section>
+
+        <section class="panel hidden" id="seatPanel">
+            <h2>2. Select Your Seats</h2>
+
+            <div id="selectedShowInfo"></div>
+
+            <div class="screen">SCREEN THIS WAY</div>
+
+            <div class="seat-legend">
+                <div class="legend-item">
+                    <span class="legend-box" style="background:#173a2a;border:1px solid #28c76f"></span>
+                    Available
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-box" style="background:#4a2530;border:1px solid #8c3c4e"></span>
+                    Occupied
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-box" style="background:#4d8dff"></span>
+                    Selected
+                </div>
+            </div>
+
+            <div id="seatStatus" class="loading">Loading seats...</div>
+            <div id="seatGrid" class="seat-grid"></div>
+
+            <div class="seat-summary">
+                <div>
+                    <p>Selected seats</p>
+                    <strong id="selectedSeatsText">None</strong>
+                    <p id="seatCount">0 tickets selected</p>
+                </div>
+
+                <div>
+                    <p>Total amount</p>
+                    <div class="total" id="totalPrice">₹0</div>
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="checkoutButton"
+                    onclick="openCheckout()"
+                    disabled
+                >
+                    Continue to Checkout
+                </button>
+            </div>
+        </section>
+
+        <section class="panel hidden" id="checkoutPanel">
+            <h2>3. Confirm Your Booking</h2>
+
+            <div id="checkoutSummary"></div>
+
+            <div style="margin-top:20px">
+                <label for="customerName">Your name</label>
+                <input
+                    type="text"
+                    id="customerName"
+                    maxlength="80"
+                    placeholder="Enter your name"
+                    autocomplete="name"
+                >
+            </div>
+
+            <div style="margin-top:16px">
+                <label for="customerEmail">Email address</label>
+                <input
+                    type="email"
+                    id="customerEmail"
+                    maxlength="150"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="message" id="checkoutMessage"></div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+                <button class="secondary-btn" onclick="backToSeats()">
+                    Back to Seats
+                </button>
+
+                <button
+                    class="primary-btn"
+                    id="confirmButton"
+                    onclick="confirmBooking()"
+                >
+                    Confirm Booking
+                </button>
+            </div>
+        </section>
+
+        <section class="panel hidden" id="confirmationPanel">
+            <h2>🎉 Booking Confirmation</h2>
+            <div id="confirmationDetails"></div>
+
+            <button
+                class="primary-btn"
+                style="margin-top:20px"
+                onclick="resetBooking()"
+            >
+                Book Another Movie
+            </button>
+
+            <button
+                class="secondary-btn"
+                style="margin-top:20px"
+                onclick="showBookings()"
+            >
+                View My Bookings
+            </button>
+        </section>
+
+        <section class="panel hidden" id="historyPanel">
+            <h2>My Bookings</h2>
+
+            <p style="color:var(--muted)">
+                Enter your booking reference to retrieve a booking.
+            </p>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <input
+                    id="referenceSearch"
+                    placeholder="Example: CV-ABC123"
+                    style="flex:1;min-width:200px"
+                >
+
+                <button class="primary-btn" onclick="findBooking()">
+                    Find Booking
+                </button>
+            </div>
+
+            <div id="historyResults"></div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 CineVerse. Your next movie adventure starts here.
+    </footer>
+
+    <script>
+        const API = "/api";
+
+        const state = {
+            movies: [],
+            showtimes: [],
+            selectedShowtime: null,
+            seats: [],
+            selectedSeats: new Set(),
+            price: 0,
+            busy: false
+        };
+
+        const $ = id => document.getElementById(id);
+
+        function money(value) {
+            return new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 2
+            }).format(Number(value) || 0);
+        }
+
+        async function api(url, options = {}) {
+            const response = await fetch(url, {
+                ...options,
+                headers: {
+                    ...(options.body ? {
+                        "Content-Type": "application/json"
+                    } : {}),
+                    ...(options.headers || {})
+                }
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || data.error || `Request failed (${response.status})`
+                );
+            }
+
+            return data;
+        }
+
+        function showMessage(elementId, message, type = "error") {
+            const element = $(elementId);
+            element.textContent = message;
+            element.className = `message ${type}`;
+        }
+
+        function clearMessage(elementId) {
+            const element = $(elementId);
+            element.textContent = "";
+            element.className = "message";
+        }
+
+        function hidePanels() {
+            [
+                "seatPanel",
+                "checkoutPanel",
+                "confirmationPanel",
+                "historyPanel"
+            ].forEach(id => $(id).classList.add("hidden"));
+        }
+
+        function showSection(id) {
+            $(id).scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function isFutureShowtime(showtime) {
+            const date = String(showtime.show_date || "").slice(0, 10);
+            const time = String(showtime.show_time || "00:00").slice(0, 5);
+
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                return false;
+            }
+
+            const parsed = new Date(`${date}T${time}:00+05:30`);
+
+            return !Number.isNaN(parsed.getTime()) &&
+                parsed.getTime() > Date.now();
+        }
+
+        function getShowtimeId(showtime) {
+            return showtime.showtime_id ?? showtime.id;
+        }
+
+        function getTheatreName(showtime) {
+            return showtime.theatre_name ||
+                showtime.name ||
+                "Cinema";
+        }
+
+        function getCity(showtime) {
+            return showtime.theatre_city ||
+                showtime.location ||
+                "";
+        }
+
+        async function loadMovies() {
+            const data = await api(`${API}/movies`);
+
+            state.movies = Array.isArray(data)
+                ? data
+                : data.movies || [];
+
+            $("movieSelect").innerHTML = "";
+
+            if (!state.movies.length) {
+                $("movieSelect").add(new Option("No movies found", ""));
+                return;
+            }
+
+            $("movieSelect").add(new Option("Select a movie", ""));
+
+            state.movies.forEach(movie => {
+                $("movieSelect").add(
+                    new Option(movie.title, movie.id)
+                );
+            });
+
+            const params = new URLSearchParams(location.search);
+            const requestedMovie = params.get("movieId");
+
+            if (requestedMovie &&
+                state.movies.some(m => String(m.id) === requestedMovie)) {
+                $("movieSelect").value = requestedMovie;
+                await loadShowtimes();
+            }
+        }
+
+        async function loadShowtimes() {
+            hidePanels();
+
+            $("showtimeList").innerHTML = "";
+            $("showtimeStatus").textContent = "Loading showtimes...";
+
+            state.showtimes = [];
+            state.selectedShowtime = null;
+            state.selectedSeats.clear();
+
+            const movieId = $("movieSelect").value;
+
+            if (!movieId) {
+                $("showtimeStatus").textContent =
+                    "Choose a movie to see its showtimes.";
+                return;
+            }
+
+            try {
+                const data = await api(
+                    `${API}/movies/${encodeURIComponent(movieId)}/showtimes`
+                );
+
+                const list = Array.isArray(data)
+                    ? data
+                    : data.showtimes || [];
+
+                state.showtimes = list;
+
+                populateCities();
+
+                renderShowtimes();
+
+            } catch (error) {
+                $("showtimeStatus").textContent =
+                    "Unable to load showtimes.";
+
+                showMessage("globalMessage", error.message);
+            }
+        }
+
+        function populateCities() {
+            const select = $("cityFilter");
+            const previous = select.value;
+
+            const cities = [
+                ...new Set(
+                    state.showtimes
+                        .map(getCity)
+                        .filter(Boolean)
+                )
+            ];
+
+            select.innerHTML = "";
+            select.add(new Option("All cities", ""));
+
+            cities.forEach(city => {
+                select.add(new Option(city, city));
+            });
+
+            if (cities.includes(previous)) {
+                select.value = previous;
+            }
+        }
+
+        function renderShowtimes() {
+            const list = $("showtimeList");
+            list.innerHTML = "";
+
+            const selectedDate = $("dateFilter").value;
+            const selectedCity = $("cityFilter").value;
+
+            const filtered = state.showtimes.filter(show => {
+                const date = String(show.show_date || "").slice(0, 10);
+
+                return isFutureShowtime(show) &&
+                    (!selectedDate || date === selectedDate) &&
+                    (!selectedCity || getCity(show) === selectedCity);
+            });
+
+            if (!filtered.length) {
+                $("showtimeStatus").textContent =
+                    "No upcoming showtimes match your filters.";
+                return;
+            }
+
+            $("showtimeStatus").textContent =
+                `${filtered.length} upcoming showtime(s) available.`;
+
+            filtered.forEach(show => {
+                const card = document.createElement("article");
+                card.className = "showtime-card";
+
+                const heading = document.createElement("h3");
+                heading.textContent = getTheatreName(show);
+
+                const dateTime = document.createElement("p");
+                dateTime.textContent =
+                    `${show.show_date} • ${show.show_time}`;
+
+                const city = document.createElement("p");
+                city.textContent = getCity(show);
+
+                const price = document.createElement("div");
+                price.className = "price";
+                price.textContent = money(show.ticket_price);
+
+                const button = document.createElement("button");
+                button.className = "primary-btn";
+                button.style.marginTop = "15px";
+                button.textContent = "Choose Seats";
+
+                button.addEventListener("click", () => {
+                    selectShowtime(show, card);
+                });
+
+                card.append(heading, dateTime, city, price, button);
+                list.appendChild(card);
+            });
+        }
+
+        async function selectShowtime(show, card) {
+            if (state.busy) return;
+
+            document.querySelectorAll(".showtime-card")
+                .forEach(item => item.classList.remove("active"));
+
+            card.classList.add("active");
+
+            state.selectedShowtime = show;
+            state.price = Number(show.ticket_price);
+
+            state.selectedSeats.clear();
+            state.seats = [];
+
+            hidePanels();
+            $("seatPanel").classList.remove("hidden");
+            $("seatStatus").textContent = "Loading seats...";
+            $("seatGrid").innerHTML = "";
+
+            $("selectedShowInfo").textContent =
+                `${show.movie_title || "Movie"} • ` +
+                `${getTheatreName(show)} • ` +
+                `${show.show_date} ${show.show_time}`;
+
+            updateSeatSummary();
+
+            showSection("seatPanel");
+
+            try {
+                const data = await api(
+                    `${API}/showtimes/${encodeURIComponent(
+                        getShowtimeId(show)
+                    )}/seats`
+                );
+
+                state.seats = data.seats || [];
+
+                renderSeats();
+
+            } catch (error) {
+                $("seatStatus").textContent = "Unable to load seats.";
+                showMessage("globalMessage", error.message);
+            }
+        }
+
+        function renderSeats() {
+            const grid = $("seatGrid");
+            grid.innerHTML = "";
+
+            if (!state.seats.length) {
+                $("seatStatus").textContent = "No seat information available.";
+                return;
+            }
+
+            $("seatStatus").textContent =
+                `${state.seats.length} seats in this theatre.`;
+
+            state.seats.forEach((seat, index) => {
+                const button = document.createElement("button");
+
+                const label = seat.seat_label;
+
+                button.textContent = label;
+                button.className = "seat";
+
+                if (seat.status === "occupied") {
+                    button.classList.add("occupied");
+                    button.disabled = true;
+                    button.title = `${label} is occupied`;
+                } else {
+                    button.classList.add("available");
+                    button.title = `${label} is available`;
+
+                    button.addEventListener("click", () => {
+                        toggleSeat(label);
+                    });
+                }
+
+                if (state.selectedSeats.has(label)) {
+                    button.classList.remove("available");
+                    button.classList.add("selected");
+                }
+
+                if (index > 0 && index % 10 === 0) {
+                    button.classList.add("row-gap");
+                }
+
+                grid.appendChild(button);
+            });
+        }
+
+        function toggleSeat(label) {
+            if (state.busy) return;
+
+            if (state.selectedSeats.has(label)) {
+                state.selectedSeats.delete(label);
+            } else {
+                if (state.selectedSeats.size >= 10) {
+                    showMessage(
+                        "globalMessage",
+                        "You can select a maximum of 10 seats per booking."
+                    );
+                    return;
+                }
+
+                state.selectedSeats.add(label);
+            }
+
+            clearMessage("globalMessage");
+            renderSeats();
+            updateSeatSummary();
+        }
+
+        function updateSeatSummary() {
+            const seats = [...state.selectedSeats].sort();
+
+            $("selectedSeatsText").textContent =
+                seats.length ? seats.join(", ") : "None";
+
+            $("seatCount").textContent =
+                `${seats.length} ticket(s) selected`;
+
+            $("totalPrice").textContent =
+                money(seats.length * state.price);
+
+            $("checkoutButton").disabled =
+                seats.length === 0 || state.busy;
+        }
+
+        function openCheckout() {
+            if (!state.selectedShowtime ||
+                state.selectedSeats.size === 0) {
+                return;
+            }
+
+            hidePanels();
+            $("checkoutPanel").classList.remove("hidden");
+            clearMessage("checkoutMessage");
+
+            const show = state.selectedShowtime;
+            const seats = [...state.selectedSeats].sort();
+            const total = seats.length * state.price;
+
+            $("checkoutSummary").innerHTML = "";
+
+            const details = document.createElement("div");
+            details.className = "booking-card";
+
+            const lines = [
+                ["Movie", show.movie_title || "Movie"],
+                ["Theatre", getTheatreName(show)],
+                ["City", getCity(show)],
+                ["Date", show.show_date],
+                ["Time", show.show_time],
+                ["Seats", seats.join(", ")],
+                ["Tickets", String(seats.length)],
+                ["Price per ticket", money(state.price)],
+                ["Total", money(total)]
+            ];
+
+            lines.forEach(([label, value]) => {
+                const row = document.createElement("div");
+                const strong = document.createElement("strong");
+
+                strong.textContent = `${label}: `;
+                row.append(strong, document.createTextNode(value));
+
+                details.appendChild(row);
+            });
+
+            $("checkoutSummary").appendChild(details);
+
+            $("confirmButton").disabled = false;
+            $("confirmButton").textContent = "Confirm Booking";
+
+            showSection("checkoutPanel");
+        }
+
+        function backToSeats() {
+            $("checkoutPanel").classList.add("hidden");
+            $("seatPanel").classList.remove("hidden");
+            showSection("seatPanel");
+        }
+
+        async function confirmBooking() {
+            if (state.busy) return;
+
+            const customerName = $("customerName").value.trim();
+            const customerEmail = $("customerEmail").value.trim();
+
+            if (customerName.length < 2) {
+                showMessage(
+                    "checkoutMessage",
+                    "Enter your name (at least 2 characters)."
+                );
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+                showMessage(
+                    "checkoutMessage",
+                    "Enter a valid email address."
+                );
+                return;
+            }
+
+            if (!state.selectedShowtime ||
+                state.selectedSeats.size === 0) {
+                showMessage(
+                    "checkoutMessage",
+                    "Choose a showtime and at least one seat."
+                );
+                return;
+            }
+
+            if (!isFutureShowtime(state.selectedShowtime)) {
+                showMessage(
+                    "checkoutMessage",
+                    "This showtime has passed. Choose an upcoming show."
+                );
+                return;
+            }
+
+            state.busy = true;
+            $("confirmButton").disabled = true;
+            $("confirmButton").textContent = "Processing...";
+            $("checkoutButton").disabled = true;
+
+            try {
+                const payload = {
+                    showtime_id: Number(
+                        getShowtimeId(state.selectedShowtime)
+                    ),
+                    seats: [...state.selectedSeats],
+                    customer_name: customerName,
+                    customer_email: customerEmail
+                };
+
+                const result = await api(`${API}/bookings`, {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                });
+
+                const booking = result.booking || result;
+
+                hidePanels();
+                $("confirmationPanel").classList.remove("hidden");
+
+                $("confirmationDetails").innerHTML = "";
+
+                const card = document.createElement("div");
+                card.className = "booking-card";
+
+                const fields = [
+                    ["Booking reference",
+                        booking.booking_reference ||
+                        booking.reference ||
+                        "Created"],
+                    ["Movie",
+                        state.selectedShowtime.movie_title || "Movie"],
+                    ["Theatre",
+                        getTheatreName(state.selectedShowtime)],
+                    ["Seats",
+                        [...state.selectedSeats].sort().join(", ")],
+                    ["Total",
+                        money(booking.total_amount ??
+                            state.selectedSeats.size * state.price)],
+                    ["Status",
+                        booking.status || "confirmed"]
+                ];
+
+                fields.forEach(([label, value]) => {
+                    const row = document.createElement("p");
+                    const strong = document.createElement("strong");
+
+                    strong.textContent = `${label}: `;
+                    row.append(strong, document.createTextNode(String(value)));
+
+                    card.appendChild(row);
+                });
+
+                const note = document.createElement("p");
+                note.textContent =
+                    "Keep your booking reference to retrieve your booking later.";
+
+                card.appendChild(note);
+                $("confirmationDetails").appendChild(card);
+
+                state.selectedSeats.clear();
+
+                showSection("confirmationPanel");
+
+            } catch (error) {
+                showMessage(
+                    "checkoutMessage",
+                    `${error.message} If a seat was taken by another user, return to the seat map and select again.`
+                );
+
+                // Refresh the seat map so newly occupied seats are displayed.
+                try {
+                    const data = await api(
+                        `${API}/showtimes/${encodeURIComponent(
+                            getShowtimeId(state.selectedShowtime)
+                        )}/seats`
+                    );
+
+                    state.seats = data.seats || [];
+
+                    for (const label of [...state.selectedSeats]) {
+                        const seat = state.seats.find(
+                            item => item.seat_label === label
+                        );
+
+                        if (!seat || seat.status === "occupied") {
+                            state.selectedSeats.delete(label);
+                        }
+                    }
+
+                    renderSeats();
+                    updateSeatSummary();
+
+                } catch (_) {
+                    // Keep the original booking error visible.
+                }
+
+            } finally {
+                state.busy = false;
+                $("confirmButton").disabled = false;
+                $("confirmButton").textContent = "Confirm Booking";
+                updateSeatSummary();
+            }
+        }
+
+        function resetBooking() {
+            state.selectedShowtime = null;
+            state.seats = [];
+            state.selectedSeats.clear();
+
+            hidePanels();
+
+            $("showtimeList").innerHTML = "";
+            $("showtimeStatus").textContent = "";
+
+            clearMessage("globalMessage");
+
+            loadShowtimes();
+            showSection("moviePanel");
+        }
+
+        function showBookings() {
+            hidePanels();
+            $("historyPanel").classList.remove("hidden");
+            $("historyResults").innerHTML = "";
+            showSection("historyPanel");
+        }
+
+        async function findBooking() {
+            const reference = $("referenceSearch").value.trim();
+
+            if (!reference) {
+                $("historyResults").textContent =
+                    "Enter your booking reference.";
+                return;
+            }
+
+            $("historyResults").textContent = "Searching...";
+
+            try {
+                const result = await api(
+                    `${API}/bookings/${encodeURIComponent(reference)}`
+                );
+
+                const booking = result.booking || result;
+
+                $("historyResults").innerHTML = "";
+
+                const card = document.createElement("div");
+                card.className = "booking-card";
+
+                const fields = [
+                    ["Reference",
+                        booking.booking_reference || booking.reference],
+                    ["Movie", booking.movie_title],
+                    ["Theatre", booking.theatre_name],
+                    ["City", booking.theatre_city],
+                    ["Date", booking.show_date],
+                    ["Time", booking.show_time],
+                    ["Seats",
+                        Array.isArray(booking.seats)
+                            ? booking.seats.map(s =>
+                                typeof s === "string"
+                                    ? s
+                                    : s.seat_label
+                            ).join(", ")
+                            : booking.seats],
+                    ["Total", money(booking.total_amount)],
+                    ["Status", booking.status]
+                ];
+
+                fields.forEach(([label, value]) => {
+                    if (value === undefined || value === null) return;
+
+                    const row = document.createElement("p");
+                    const strong = document.createElement("strong");
+
+                    strong.textContent = `${label}: `;
+                    row.append(
+                        strong,
+                        document.createTextNode(String(value))
+                    );
+
+                    card.appendChild(row);
+                });
+
+                $("historyResults").appendChild(card);
+
+            } catch (error) {
+                $("historyResults").textContent =
+                    `Unable to retrieve booking: ${error.message}`;
+            }
+        }
+
+        $("movieSelect").addEventListener("change", loadShowtimes);
+        $("dateFilter").addEventListener("change", renderShowtimes);
+        $("cityFilter").addEventListener("change", renderShowtimes);
+
+        async function initialize() {
+            try {
+                await loadMovies();
+            } catch (error) {
+                $("showtimeStatus").textContent =
+                    "Unable to load movies. Make sure the server is running.";
+
+                showMessage("globalMessage", error.message);
+            }
+        }
+
+        initialize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1501 @@
+
+/* ==========================================
+   CINEVERSE — LUXURY MONOCHROME CRYSTAL
+========================================== */
+
+:root {
+    color-scheme: dark;
+
+    --black: #070707;
+    --dark: #0d0d0d;
+    --panel: #141414;
+    --white: #f7f7f7;
+    --silver: #d1d1d1;
+    --muted: #999999;
+    --border: rgba(255, 255, 255, 0.16);
+    --glass: rgba(255, 255, 255, 0.055);
+    --glass-light: rgba(255, 255, 255, 0.10);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
+}
+
+body {
+    margin: 0;
+    color: var(--white);
+    background:
+        radial-gradient(ellipse at 50% -20%, #292929 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 45%, #191919 0%, transparent 35%),
+        linear-gradient(145deg, #080808, #101010 55%, #060606);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.65;
+}
+
+/* HEADER */
+
+.site-header {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-bottom: 1px solid var(--border);
+    background:
+        radial-gradient(ellipse at 80% 35%, rgba(255,255,255,.09), transparent 40%),
+        linear-gradient(135deg, #181818, #090909 65%);
+}
+
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    background:
+        linear-gradient(115deg, transparent 35%, rgba(255,255,255,.045) 48%, transparent 61%);
+}
+
+.navbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 21px 8%;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    background: rgba(12,12,12,.55);
+    backdrop-filter: blur(28px) saturate(120%);
+    -webkit-backdrop-filter: blur(28px) saturate(120%);
+}
+
+.logo {
+    color: #fff;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #a8a8a8;
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #c1c1c1;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 17px;
+    border: 1px solid rgba(255,255,255,.36);
+    border-radius: 7px;
+    color: #090909;
+    background: linear-gradient(135deg, #f8f8f8, #bdbdbd);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 24px rgba(255,255,255,.12);
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 500px;
+    padding: 72px 8% 105px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+}
+
+.eyebrow {
+    margin: 0 0 15px;
+    color: #c8c8c8;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(43px, 6vw, 76px);
+    font-weight: 600;
+    letter-spacing: -3.5px;
+    line-height: 1.08;
+}
+
+.hero h1 span {
+    color: #969696;
+    font-weight: 300;
+}
+
+.hero-description {
+    max-width: 440px;
+    margin: 24px 0 27px;
+    color: #b5b5b5;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+    padding: 13px 19px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 7px;
+    color: #080808;
+    background: linear-gradient(135deg, #fff, #c5c5c5);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.hero-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,255,255,.13);
+}
+
+.hero-caption {
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+/* CSS-BASED CRYSTAL ORB */
+
+.hero-visual {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    width: min(36vw, 390px);
+    aspect-ratio: 1;
+    transform: translateY(-53%);
+    pointer-events: none;
+}
+
+.hero-glass {
+    position: absolute;
+    inset: 14%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.48);
+    border-radius: 28%;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.22), transparent 30%),
+        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.015) 65%),
+        rgba(110,110,110,.04);
+    box-shadow:
+        inset 2px 2px 2px rgba(255,255,255,.28),
+        inset -3px -3px 15px rgba(255,255,255,.035),
+        0 0 65px rgba(255,255,255,.065),
+        0 35px 90px rgba(0,0,0,.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: rotate(-12deg);
+}
+
+.hero-glass::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: -20%;
+    width: 85%;
+    height: 65%;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    filter: blur(32px);
+}
+
+.hero-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        125deg,
+        transparent 35%,
+        rgba(255,255,255,.12) 48%,
+        transparent 55%
+    );
+}
+
+.glass-symbol {
+    position: relative;
+    z-index: 1;
+    color: rgba(255,255,255,.84);
+    font-size: clamp(85px, 12vw, 155px);
+    font-weight: 200;
+    letter-spacing: -12px;
+    text-shadow: 0 0 35px rgba(255,255,255,.2);
+}
+
+.glass-caption {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 25px;
+    left: 0;
+    color: rgba(255,255,255,.65);
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.hero-orbit {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 50%;
+}
+
+.orbit-one {
+    transform: rotateX(65deg) rotate(-25deg);
+}
+
+.orbit-two {
+    inset: 8%;
+    transform: rotateY(65deg) rotate(25deg);
+}
+
+.hero-reflection {
+    position: absolute;
+    right: 8%;
+    bottom: 4%;
+    left: 8%;
+    height: 15%;
+    border-radius: 50%;
+    background: rgba(255,255,255,.10);
+    filter: blur(30px);
+}
+
+.hero-bottom {
+    position: absolute;
+    right: 8%;
+    bottom: 22px;
+    left: 8%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 17px;
+    border-top: 1px solid rgba(255,255,255,.13);
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+/* MAIN CONTENT */
+
+main {
+    padding: 55px 8%;
+}
+
+section.movies-section,
+section.feature-section,
+section.games-section {
+    margin-bottom: 38px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.065), rgba(255,255,255,.015));
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 18px 55px rgba(0,0,0,.18);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.movies-section {
+    padding: 32px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.section-heading .eyebrow {
+    margin-bottom: 8px;
+}
+
+.section-heading h2,
+.feature-copy h2,
+.games-section h2 {
+    margin: 0;
+    color: #f5f5f5;
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1.3;
+}
+
+.heading-period {
+    color: #858585;
+}
+
+.section-description {
+    margin: 8px 0 0;
+    color: #888;
+    font-size: 13px;
+}
+
+.section-note {
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+/* SEARCH */
+
+.search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 27px;
+    padding: 0 15px;
+    border: 1px solid rgba(255,255,255,.17);
+    border-radius: 9px;
+    background: rgba(255,255,255,.045);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    transition: border-color .2s ease, background .2s ease;
+}
+
+.search-wrap:focus-within {
+    border-color: rgba(255,255,255,.55);
+    background: rgba(255,255,255,.07);
+}
+
+.search-icon {
+    color: #d0d0d0;
+    font-size: 25px;
+}
+
+#movie-search {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 16px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+}
+
+#movie-search::placeholder {
+    color: #777;
+}
+
+.search-shortcut {
+    color: #777;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+}
+
+/* MOVIE CARDS */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.movie-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.018));
+    box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,255,255,.42);
+    box-shadow: 0 17px 38px rgba(0,0,0,.36), 0 0 18px rgba(255,255,255,.04);
+}
+
+.movie-poster {
+    position: relative;
+    height: 245px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #3b3b3b, #111);
+}
+
+.movie-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease, filter .4s ease;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.045);
+    filter: brightness(1.08);
+}
+
+.movie-open {
+    cursor: pointer;
+}
+
+.movie-open:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+}
+
+.poster-fallback-title {
+    display: none;
+}
+
+.movie-poster.poster-fallback .poster-fallback-title {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.movie-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 9px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 5px;
+    background: rgba(0,0,0,.72);
+    color: #fff;
+    font-size: 11px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.movie-info {
+    padding: 15px;
+}
+
+.movie-info h3 {
+    margin: 0 0 4px;
+    color: #f5f5f5;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.movie-genre {
+    margin: 0 0 9px;
+    color: #aaa !important;
+    font-size: 11px;
+}
+
+.movie-description {
+    min-height: 42px;
+    margin: 0 0 14px;
+    color: #999;
+    font-size: 12px;
+}
+
+.book-button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,.38);
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f5f5f5, #bcbcbc);
+    color: #080808;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.book-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 18px rgba(255,255,255,.12);
+}
+
+/* FEATURE SECTIONS */
+
+.feature-section,
+.games-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 34px;
+}
+
+.feature-copy {
+    max-width: 560px;
+}
+
+.feature-copy h2 {
+    font-size: clamp(27px, 3.5vw, 40px);
+}
+
+.feature-copy > p:last-child,
+.games-section > div > p:last-child {
+    max-width: 480px;
+    color: #999;
+    font-size: 13px;
+}
+
+.feature-mark {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 115px;
+    height: 115px;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.025));
+    color: #eee;
+    font-size: 32px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 10px 35px rgba(0,0,0,.3);
+    transform: rotate(-8deg);
+}
+
+.feature-mark span {
+    color: #888;
+}
+
+.coming-soon-label {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 5px;
+    color: #aaa;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+/* FOOTER */
+
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 8%;
+    border-top: 1px solid rgba(255,255,255,.14);
+    background: rgba(5,5,5,.68);
+}
+
+.footer-logo {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.site-footer p {
+    color: #777;
+    font-size: 11px;
+}
+
+.footer-copy {
+    color: #666;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* MOVIE DETAILS POPUP */
+
+.movie-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.movie-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 32px;
+    border: 1px solid rgba(255,255,255,.34);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(75,75,75,.88), rgba(15,15,15,.97));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.17), 0 25px 75px rgba(0,0,0,.65);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+}
+
+.modal-content h2 {
+    margin: 8px 0 12px;
+    color: #fff;
+}
+
+.modal-content p:not(.eyebrow) {
+    color: #c4c4c4;
+}
+
+.close-modal {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #aaa;
+}
+
+#modal-book-button {
+    margin-top: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+    .hero-visual {
+        right: 5%;
+        width: 32vw;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 17px;
+        padding: 18px 5%;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 490px;
+        padding: 60px 5% 90px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 10vw, 60px);
+        letter-spacing: -2px;
+    }
+
+    .hero-visual {
+        top: 48%;
+        right: -12%;
+        width: 60vw;
+        opacity: .22;
+    }
+
+    .hero-bottom {
+        right: 5%;
+        left: 5%;
+        font-size: 8px;
+    }
+
+    .hero-bottom span:nth-child(2) {
+        display: none;
+    }
+
+    main {
+        padding: 28px 5%;
+    }
+
+    .movies-section,
+    .feature-section,
+    .games-section {
+        padding: 22px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .section-note {
+        white-space: normal;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .movie-poster {
+        height: 210px;
+    }
+
+    .feature-section,
+    .games-section {
+        align-items: flex-start;
+    }
+
+    .feature-mark {
+        width: 75px;
+        height: 75px;
+        border-radius: 22px;
+        font-size: 23px;
+    }
+
+    .coming-soon-label {
+        font-size: 8px;
+    }
+
+    .site-footer {
+        flex-wrap: wrap;
+        padding: 22px 5%;
+    }
+
+    .site-footer p {
+        order: 3;
+        width: 100%;
+        margin: 0;
+    }
+
+    .modal-content {
+        padding: 28px 22px;
+    }
+}
+
+@media (max-width: 380px) {
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .movie-poster {
+        height: 270px;
+    }
+
+    .search-shortcut {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+/* ========================================
+   CINEVERSE — PREMIUM SHOWTIME CARDS
+======================================== */
+
+.showtimes-section {
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.showtimes-section h3 {
+    margin: 0 0 18px;
+    color: #f7f7f7;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+}
+
+#showtimes-list {
+    display: grid;
+    gap: 14px;
+}
+
+.showtime-card {
+    position: relative;
+    overflow: hidden;
+    padding: 19px;
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 11px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.085),
+            rgba(255, 255, 255, 0.018)
+        );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 8px 25px rgba(0, 0, 0, 0.2);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.showtime-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.4);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.035)
+        );
+}
+
+.showtime-card h4 {
+    margin: 0 0 3px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.showtime-card p {
+    margin: 5px 0;
+    color: #b7b7b7;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.showtime-card p:last-child {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .showtime-card {
+        padding: 15px;
+    }
+
+    .showtimes-section h3 {
+        font-size: 18px;
+    }
+}
+/* ========================================
+   CINEVERSE — SELECTABLE SHOWTIMES
+======================================== */
+
+.showtime-card {
+    cursor: pointer;
+}
+
+.showtime-card.selected {
+    border-color: rgba(255, 255, 255, 0.9);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.16),
+            rgba(255, 255, 255, 0.045)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+        0 0 22px rgba(255, 255, 255, 0.06);
+}
+
+.showtime-card:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+/* ========================================
+   CINEVERSE — SEAT SELECTION INTERFACE
+======================================== */
+
+.seat-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+
+    background: rgba(0, 0, 0, 0.86);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.seat-modal.active {
+    display: flex;
+}
+
+
+/* MAIN POPUP */
+
+.seat-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 38px;
+
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(55, 55, 55, 0.96),
+            rgba(12, 12, 12, 0.99)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 30px 90px rgba(0, 0, 0, 0.8);
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+}
+
+.seat-modal-content h2 {
+    margin: 8px 0 12px;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
+#seat-movie-name {
+    margin: 0 0 6px;
+    color: #f0f0f0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#seat-showtime-details {
+    margin: 0;
+    color: #a8a8a8;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* CINEMA SCREEN */
+
+.cinema-screen-container {
+    margin: 42px auto 36px;
+    max-width: 520px;
+    text-align: center;
+}
+
+.cinema-screen {
+    height: 8px;
+    width: 100%;
+
+    border-radius: 50%;
+    background: #f5f5f5;
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.65),
+        0 8px 28px rgba(255, 255, 255, 0.15);
+
+    transform: perspective(180px) rotateX(-12deg);
+}
+
+.cinema-screen-container p {
+    margin-top: 17px;
+    color: #858585;
+    font-size: 10px;
+    letter-spacing: 5px;
+}
+
+
+/* SEAT GRID CONTAINER */
+
+.seat-grid {
+    display: grid;
+    gap: 11px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+
+/* SEAT LEGEND */
+
+.seat-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 28px 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #bdbdbd;
+    font-size: 12px;
+}
+
+.legend-seat {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+
+.legend-seat.available {
+    background: #292929;
+}
+
+.legend-seat.selected {
+    background: #f5f5f5;
+    border-color: #ffffff;
+}
+
+.legend-seat.occupied {
+    background: #080808;
+    border-color: #555555;
+    opacity: 0.55;
+}
+
+
+/* BOOKING SUMMARY */
+
+.seat-booking-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-top: 28px;
+    padding: 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.seat-booking-summary p {
+    margin: 0 0 8px;
+    color: #929292;
+    font-size: 12px;
+}
+
+.seat-booking-summary h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+
+/* CONTINUE BUTTON */
+
+#confirm-seats-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 9px;
+
+    background: #f4f4f4;
+    color: #080808;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#confirm-seats-button:hover {
+    background: #d8d8d8;
+    transform: translateY(-2px);
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 600px) {
+    .seat-modal {
+        padding: 10px;
+    }
+
+    .seat-modal-content {
+        padding: 25px 16px;
+        max-height: calc(100vh - 20px);
+    }
+
+    .seat-modal-content h2 {
+        font-size: 25px;
+    }
+
+    .cinema-screen-container {
+        margin-top: 32px;
+        margin-bottom: 25px;
+    }
+
+    .seat-legend {
+        gap: 15px;
+    }
+
+    .seat-booking-summary {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .seat-booking-summary h3 {
+        font-size: 15px;
+    }
+}
+/* ========================================
+   CINEVERSE — INTERACTIVE CINEMA SEATS
+======================================== */
+
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 36px);
+    gap: 12px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.cinema-seat {
+    width: 36px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 7px 7px 4px 4px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+
+    cursor: pointer;
+}
+
+/* Available seat */
+
+.cinema-seat.available {
+    background: #292929;
+    color: #eeeeee;
+}
+
+.cinema-seat.available:hover {
+    background: #484848;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Selected seat */
+
+.cinema-seat.selected {
+    background: #f5f5f5;
+    color: #080808;
+    border-color: #ffffff;
+
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Occupied seat */
+
+.cinema-seat.occupied {
+    background: #080808;
+    color: #555555;
+    border-color: #333333;
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+/* Keyboard focus */
+
+.cinema-seat:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* Responsive seat layout */
+
+@media (max-width: 480px) {
+    .seat-grid {
+        grid-template-columns: repeat(8, 29px);
+        gap: 7px;
+    }
+
+    .cinema-seat {
+        width: 29px;
+        height: 28px;
+        font-size: 10px;
+    }
+}
+/* ========================================
+   CINEVERSE — BOOKING CONFIRMATION POPUP
+======================================== */
+
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow-y: auto;
+}
+
+.booking-modal.active {
+    display: flex;
+}
+
+.booking-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px;
+    background: linear-gradient(145deg, #191919, #090909);
+    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.7);
+    color: #f5f5f5;
+    text-align: center;
+    animation: bookingModalEnter 0.3s ease;
+}
+
+.booking-modal-content .close-modal {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+}
+
+.booking-success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 22px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.booking-modal-content .eyebrow {
+    margin-bottom: 10px;
+    color: #a5a5a5;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.booking-modal-content h2 {
+    margin: 0 0 10px;
+    font-size: clamp(25px, 5vw, 34px);
+    letter-spacing: -1px;
+}
+
+.booking-success-message {
+    margin: 0 0 26px;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.booking-reference-box {
+    margin-bottom: 22px;
+    padding: 18px;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.booking-reference-box p {
+    margin: 0 0 8px;
+    color: #999;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.booking-reference-box h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 21px;
+    letter-spacing: 1.5px;
+    overflow-wrap: anywhere;
+}
+
+.booking-details {
+    padding: 0 2px;
+    text-align: left;
+}
+
+.booking-detail-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 13px;
+}
+
+.booking-detail-row > span {
+    flex-shrink: 0;
+    color: #999;
+}
+
+.booking-detail-row strong {
+    color: #f1f1f1;
+    font-weight: 500;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.booking-total-row {
+    margin-top: 5px;
+    padding: 19px 0;
+    border-bottom: none;
+}
+
+.booking-total-row > span {
+    color: #fff;
+    font-size: 15px;
+}
+
+.booking-total-row strong {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+#close-booking-button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+@keyframes bookingModalEnter {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 520px) {
+    .booking-modal {
+        padding: 12px;
+    }
+
+    .booking-modal-content {
+        padding: 32px 22px 24px;
+        max-height: 94vh;
+        border-radius: 16px;
+    }
+
+    .booking-detail-row {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .booking-reference-box h3 {
+        font-size: 18px;
+    }
+}

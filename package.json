@@ -1,0 +1,23 @@
+{
+  "name": "cineverse",
+  "version": "1.0.0",
+  "description": "A full-stack movie ticket booking web application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "movie-booking",
+    "ticket-booking",
+    "nodejs",
+    "express",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.3.0"
+  }
+}
